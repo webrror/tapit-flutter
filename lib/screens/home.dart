@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:tapit/screens/about.dart';
@@ -30,9 +29,9 @@ class Home extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       LottieBuilder.asset('assets/animations/homeanim.json'),
-                      Text(
-                        'Tap it',
-                        style: GoogleFonts.rubikBubbles(fontSize: 50),
+                      const Text(
+                        'Tapit',
+                        style: TextStyle(fontSize: 50, fontFamily: 'Rubik'),
                       ),
                       const SizedBox(
                         height: 40,
@@ -47,7 +46,7 @@ class Home extends StatelessWidget {
                           },
                           child: GradientText(
                             'Start',
-                            style: GoogleFonts.lato(fontSize: 20),
+                            style: const TextStyle(fontSize: 20),
                             colors: const [
                               Colors.deepOrangeAccent, // 255 110 64 255
                               Colors.deepPurpleAccent // 124 77 255 255
@@ -66,7 +65,7 @@ class Home extends StatelessWidget {
                           },
                           child: GradientText(
                             'How to play',
-                            style: GoogleFonts.lato(fontSize: 20),
+                            style: const TextStyle(fontSize: 20),
                             colors: const [
                               Colors.deepOrangeAccent, // 255 110 64 255
                               Colors.deepPurpleAccent // 124 77 255 255
@@ -85,7 +84,7 @@ class Home extends StatelessWidget {
                           },
                           child: GradientText(
                             'About',
-                            style: GoogleFonts.lato(fontSize: 20),
+                            style: const TextStyle(fontSize: 20),
                             colors: const [
                               Colors.deepOrangeAccent, // 255 110 64 255
                               Colors.deepPurpleAccent // 124 77 255 255
@@ -99,9 +98,9 @@ class Home extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     LottieBuilder.asset('assets/animations/homeanim.json'),
-                    Text(
-                      'Tap it',
-                      style: GoogleFonts.rubikBubbles(fontSize: 50),
+                    const Text(
+                      'Tapit',
+                      style: TextStyle(fontSize: 50, fontFamily: 'Rubik'),
                     ),
                     const SizedBox(
                       height: 40,
@@ -116,7 +115,7 @@ class Home extends StatelessWidget {
                         },
                         child: GradientText(
                           'Start',
-                          style: GoogleFonts.lato(fontSize: 20),
+                          style: const TextStyle(fontSize: 20),
                           colors: const [
                             Colors.deepOrangeAccent, // 255 110 64 255
                             Colors.deepPurpleAccent // 124 77 255 255
@@ -135,7 +134,7 @@ class Home extends StatelessWidget {
                         },
                         child: GradientText(
                           'How to play',
-                          style: GoogleFonts.lato(fontSize: 20),
+                          style: const TextStyle(fontSize: 20),
                           colors: const [
                             Colors.deepOrangeAccent, // 255 110 64 255
                             Colors.deepPurpleAccent // 124 77 255 255
@@ -154,7 +153,7 @@ class Home extends StatelessWidget {
                         },
                         child: GradientText(
                           'About',
-                          style: GoogleFonts.lato(fontSize: 20),
+                          style: const TextStyle(fontSize: 20),
                           colors: const [
                             Colors.deepOrangeAccent, // 255 110 64 255
                             Colors.deepPurpleAccent // 124 77 255 255

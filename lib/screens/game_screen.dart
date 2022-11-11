@@ -46,13 +46,12 @@ class _GameScreenState extends State<GameScreen> {
                 child: const Text('Restart'),
               ),
             ],
-            lottieBuilder: Lottie.network(
-                'https://assets10.lottiefiles.com/packages/lf20_touohxv0.json'));
+            lottieBuilder: Lottie.asset('assets/animations/winner.json'));
       } else {
         setState(() {
           orange = orange + diff;
           purple = purple - diff;
-          print('Orange : $orange');
+          //print('Orange : $orange');
         });
       }
     }
@@ -75,14 +74,13 @@ class _GameScreenState extends State<GameScreen> {
               child: const Text('Restart'),
             ),
           ],
-          lottieBuilder: Lottie.network(
-              'https://assets10.lottiefiles.com/packages/lf20_touohxv0.json')
+            lottieBuilder: Lottie.asset('assets/animations/winner.json')
         );
       } else {
         setState(() {
           orange = orange - diff;
           purple = purple + diff;
-          print('Purple : $purple');
+          //print('Purple : $purple');
         });
       }
     }
