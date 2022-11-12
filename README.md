@@ -1,7 +1,7 @@
 <div align="center">
   <img alt="Tapit" title="Tapit" src="android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" width="80">
   <h1>Tapit</h1>
-  <p>A casual game made with Flutter.</p>
+  <p>A casual finger battle game made with Flutter.</p>
 
 <p align="center">
   <a href='https://play.google.com/store/apps/details?id=com.rejie.tapit&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
