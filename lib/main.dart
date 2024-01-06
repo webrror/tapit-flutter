@@ -29,8 +29,6 @@ class MyApp extends StatelessWidget {
         HowToPlay.routeName: (context) => const HowToPlay(),
         About.routeName: (context) => const About()
       },
-      //home: const GameScreen(),
     );
   }
 }
-

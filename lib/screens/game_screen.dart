@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:material_dialogs/material_dialogs.dart';
+import 'package:lottie/lottie.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -14,7 +15,7 @@ class _GameScreenState extends State<GameScreen> {
   double orange = 0;
   double purple = 0;
   double limit = 0;
-  double diff = 30;
+  double diff = 28;
 
   @override
   Widget build(BuildContext context) {
@@ -74,8 +75,7 @@ class _GameScreenState extends State<GameScreen> {
               child: const Text('Restart'),
             ),
           ],
-            lottieBuilder: Lottie.asset('assets/animations/winner.json')
-        );
+            lottieBuilder: Lottie.asset('assets/animations/winner.json'));
       } else {
         setState(() {
           orange = orange - diff;
