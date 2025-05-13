@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tapit/constants/string_constants.dart';
 
 class HowToPlay extends StatelessWidget {
@@ -23,9 +22,9 @@ class HowToPlay extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              RichText(
-                text: TextSpan(
-                  style: GoogleFonts.lato(fontSize: 24, color: Theme.of(context).textTheme.bodyMedium!.color),
+              Text.rich(
+                TextSpan(
+                  style: TextStyle(fontSize: 20, fontFamily: 'Lato'),
                   children: const [
                     TextSpan(
                       text: '•  Tapit is a',
@@ -41,21 +40,21 @@ class HowToPlay extends StatelessWidget {
                     )
                   ],
                 ),
-                ),
+              ),
               const SizedBox(
                 height: 20,
               ),
               Text(
                 '•  Each player has to constantly tap on the color on their side to fill out the whole screen with their color.',
                 maxLines: 5,
-                style: GoogleFonts.lato(fontSize: 20),
-                ),
+                style: TextStyle(fontSize: 20, fontFamily: 'Lato'),
+              ),
               const SizedBox(
                 height: 20,
               ),
               Text(
                 '•  First player to fill out the screen with their color wins the game.',
-                style: GoogleFonts.lato(fontSize: 20),
+                style: TextStyle(fontSize: 20, fontFamily: 'Lato'),
               ),
             ],
           ),
