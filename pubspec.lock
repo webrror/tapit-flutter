@@ -179,14 +179,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.11.1"
-  material_dialogs:
-    dependency: "direct main"
-    description:
-      name: material_dialogs
-      sha256: f072d8c11b3392a2aa6a2f279239e5063654113e1e851b62ef009b500d512f17
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.5"
   meta:
     dependency: transitive
     description:

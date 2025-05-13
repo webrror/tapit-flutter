@@ -19,7 +19,6 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
-        backgroundColor: Colors.transparent,
         forceMaterialTransparency: true,
       ),
       extendBodyBehindAppBar: true,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:tapit/constants/asset_constants.dart';
+import 'package:tapit/constants/string_constants.dart';
 
 
 class About extends StatelessWidget {
@@ -11,22 +12,17 @@ class About extends StatelessWidget {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('About'),
+        title: Text(StringConstants.about),
         elevation: 0,
-        backgroundColor: Colors.transparent,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       body: Center(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Tooltip(
-              message: 'Flutter',
-              child: Image.asset(
-                'assets/icon/builtwithflutter.png',
-                width: 200,
-              ),
+            Image.asset(
+              AssetConstants.builtWithFlutter,
+              width: 200,
             ),
           ],
         ),
