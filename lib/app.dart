@@ -17,11 +17,29 @@ class TapitApp extends StatelessWidget {
         fontFamily: 'Lato',
         useMaterial3: true,
         brightness: Brightness.light,
+        pageTransitionsTheme: PageTransitionsTheme(
+          // builders: {
+          //   TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
+          // },
+          builders: Map<TargetPlatform, PageTransitionsBuilder>.fromIterable(
+            TargetPlatform.values,
+            value: (_) => const FadeForwardsPageTransitionsBuilder(),
+          ),
+        ),
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
         fontFamily: 'Lato',
+        pageTransitionsTheme: PageTransitionsTheme(
+          // builders: {
+          //   TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
+          // },
+          builders: Map<TargetPlatform, PageTransitionsBuilder>.fromIterable(
+            TargetPlatform.values,
+            value: (_) => const FadeForwardsPageTransitionsBuilder(),
+          ),
+        ),
       ),
       initialRoute: Home.routeName,
       routes: {
