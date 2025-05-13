@@ -32,7 +32,7 @@ class _GameScreenState extends State<GameScreen> {
       setState(() {
         orangeHeight = screenHeight / 2;
         purpleHeight = screenHeight / 2;
-        heightLimit = screenHeight - 5;
+        heightLimit = screenHeight - 10;
       });
     });
   }
