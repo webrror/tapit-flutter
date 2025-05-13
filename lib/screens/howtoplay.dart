@@ -25,7 +25,7 @@ class HowToPlay extends StatelessWidget {
             children: [
               RichText(
                 text: TextSpan(
-                  style: GoogleFonts.lato(fontSize: 20),
+                  style: GoogleFonts.lato(fontSize: 24, color: Theme.of(context).textTheme.bodyMedium!.color),
                   children: const [
                     TextSpan(
                       text: '•  Tapit is a',
