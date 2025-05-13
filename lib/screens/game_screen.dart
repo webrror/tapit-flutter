@@ -1,90 +1,119 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:material_dialogs/material_dialogs.dart';
 import 'package:lottie/lottie.dart';
+import 'package:tapit/constants/asset_constants.dart';
+import 'package:tapit/constants/string_constants.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
   static const String routeName = '/game-screen';
+
   @override
   State<GameScreen> createState() => _GameScreenState();
 }
 
 class _GameScreenState extends State<GameScreen> {
-  bool intialState = true;
-  double orange = 0;
-  double purple = 0;
-  double limit = 0;
-  double diff = 28;
+  double orangeHeight = 0;
+  double purpleHeight = 0;
+  double heightLimit = 0;
+  final double heightDiff = 25;
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final screenHeight = MediaQuery.of(context).size.height;
+      setState(() {
+        orangeHeight = screenHeight / 2;
+        purpleHeight = screenHeight / 2;
+        heightLimit = screenHeight - 10;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    super.dispose();
+  }
+
+  void resetGame() {
+    final screenHeight = MediaQuery.of(context).size.height;
+    setState(() {
+      orangeHeight = screenHeight / 2;
+      purpleHeight = screenHeight / 2;
+    });
+  }
+
+  void showWinnerDialog(String winnerText) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (_) => Dialog(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Lottie.asset(AssetConstants.winner, height: 250),
+              Text(winnerText, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    resetGame();
+                  },
+                  child: Text(StringConstants.restart),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void onTapOrange() {
+    if (orangeHeight > heightLimit) {
+      showWinnerDialog(StringConstants.orangeWon);
+    } else {
+      setState(() {
+        orangeHeight += heightDiff;
+        purpleHeight -= heightDiff;
+      });
+    }
+  }
+
+  void onTapPurple() {
+    if (purpleHeight > heightLimit) {
+      showWinnerDialog(StringConstants.purpleWon);
+    } else {
+      setState(() {
+        orangeHeight -= heightDiff;
+        purpleHeight += heightDiff;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    if (intialState) {
-      var intialHeight = MediaQuery.of(context).size.height;
-      setState(() {
-        orange = intialHeight / 2;
-        purple = intialHeight / 2;
-        limit = intialHeight - 30;
-        intialState = false;
-      });
-    }
-
-    void onTapOrange() {
-      if (orange > limit) {
-        Dialogs.materialDialog(
-            color: Colors.white,
-            context: context,
-            title: 'Orange Won!',
-            barrierDismissible: false,
-            actions: [
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    intialState = true;
-                  });
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Restart'),
-              ),
-            ],
-            lottieBuilder: Lottie.asset('assets/animations/winner.json'));
-      } else {
-        setState(() {
-          orange = orange + diff;
-          purple = purple - diff;
-          //print('Orange : $orange');
-        });
-      }
-    }
-
-    void onTapPurple() {
-      if (purple > limit) {
-        Dialogs.materialDialog(
-          color: Colors.white,
-          context: context,
-          title: 'Purple Won!',
-          barrierDismissible: false,
-          actions: [
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  intialState = true;
-                });
-                Navigator.of(context).pop();
-              },
-              child: const Text('Restart'),
-            ),
-          ],
-            lottieBuilder: Lottie.asset('assets/animations/winner.json'));
-      } else {
-        setState(() {
-          orange = orange - diff;
-          purple = purple + diff;
-          //print('Purple : $purple');
-        });
-      }
-    }
-
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
@@ -94,14 +123,14 @@ class _GameScreenState extends State<GameScreen> {
               onTap: onTapOrange,
               child: Container(
                 color: Colors.deepOrangeAccent,
-                height: orange,
+                height: orangeHeight,
               ),
             ),
             GestureDetector(
               onTap: onTapPurple,
               child: Container(
                 color: Colors.deepPurpleAccent,
-                height: purple,
+                height: purpleHeight,
               ),
             ),
           ],

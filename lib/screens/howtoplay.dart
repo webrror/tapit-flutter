@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:tapit/constants/string_constants.dart';
 
 class HowToPlay extends StatelessWidget {
   const HowToPlay({super.key});
@@ -10,12 +9,10 @@ class HowToPlay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'How to play',
+        title: Text(
+          StringConstants.howToPlay,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
-        backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: Padding(
@@ -25,9 +22,9 @@ class HowToPlay extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              RichText(
-                text: TextSpan(
-                  style: GoogleFonts.lato(color: Colors.black, fontSize: 20),
+              Text.rich(
+                TextSpan(
+                  style: TextStyle(fontSize: 20, fontFamily: 'Lato'),
                   children: const [
                     TextSpan(
                       text: '•  Tapit is a',
@@ -43,21 +40,21 @@ class HowToPlay extends StatelessWidget {
                     )
                   ],
                 ),
-                ),
+              ),
               const SizedBox(
                 height: 20,
               ),
               Text(
                 '•  Each player has to constantly tap on the color on their side to fill out the whole screen with their color.',
                 maxLines: 5,
-                style: GoogleFonts.lato(fontSize: 20),
-                ),
+                style: TextStyle(fontSize: 20, fontFamily: 'Lato'),
+              ),
               const SizedBox(
                 height: 20,
               ),
               Text(
                 '•  First player to fill out the screen with their color wins the game.',
-                style: GoogleFonts.lato(fontSize: 20),
+                style: TextStyle(fontSize: 20, fontFamily: 'Lato'),
               ),
             ],
           ),
