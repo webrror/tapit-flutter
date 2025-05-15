@@ -63,6 +63,22 @@ class _AboutState extends State<About> {
                       fontSize: 16,
                     ),
                   ),
+                TextButton(
+                  onPressed: () {
+                    showLicensePage(
+                      context: context,
+                      applicationName: appInfo.appName,
+                      applicationVersion: appInfo.version,
+                      applicationIcon: Image.asset(
+                        AssetConstants.appIcon,
+                        height: 50,
+                      ),
+                    );
+                  },
+                  child: Text(
+                    "Licences",
+                  ),
+                ),
               ],
             )
           ],

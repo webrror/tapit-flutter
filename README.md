@@ -26,3 +26,18 @@
     
   </tr>
 </table>
+
+### Other Info
+
+#### Flutter Info
+
+```
+Doctor summary (to see all details, run flutter doctor -v):
+[✓] Flutter (Channel beta, 3.32.0-0.4.pre, on Arch Linux 6.14.6-arch1-1, locale en_US.UTF-8)
+[✓] Android toolchain - develop for Android devices (Android SDK version 36.0.0)
+[✓] Chrome - develop for the web
+[✓] Linux toolchain - develop for Linux desktop
+[✓] Android Studio (version 2024.3.2)
+[✓] Connected device (3 available)
+[✓] Network resources
+```
