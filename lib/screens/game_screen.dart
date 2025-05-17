@@ -63,7 +63,7 @@ class _GameScreenState extends State<GameScreen> {
       context: context,
       builder: (_) => Dialog(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -71,7 +71,7 @@ class _GameScreenState extends State<GameScreen> {
               Text(winnerText, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
               const SizedBox(height: 16),
               SizedBox(
-                width: double.infinity,
+                width: MediaQuery.of(context).size.width * 0.4,
                 child: TextButton(
                   style: TextButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 14),
@@ -81,6 +81,20 @@ class _GameScreenState extends State<GameScreen> {
                     resetGame();
                   },
                   child: Text(StringConstants.restart),
+                ),
+              ),
+              const SizedBox(height: 12),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(StringConstants.goBack),
                 ),
               ),
             ],

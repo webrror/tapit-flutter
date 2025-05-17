@@ -7,4 +7,5 @@ class StringConstants {
   static const String orangeWon = 'Orange Won!';
   static const String purpleWon = 'Purple Won!';
   static const String restart = 'Restart';
+  static const String goBack = 'Go back to menu';
 }
