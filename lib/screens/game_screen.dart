@@ -10,6 +10,7 @@ import 'package:tapit/constants/game_theme.dart';
 import 'package:tapit/constants/match_type.dart';
 import 'package:tapit/constants/power_up_type.dart';
 import 'package:tapit/constants/string_constants.dart';
+import 'package:tapit/services/settings_service.dart';
 import 'package:tapit/widgets/countdown_overlay.dart';
 import 'package:tapit/widgets/tap_effect.dart';
 
@@ -141,7 +142,7 @@ class _GameScreenState extends State<GameScreen>
         if (_remainingSeconds > 0) {
           _remainingSeconds--;
           if (_remainingSeconds <= 5 && _remainingSeconds > 0) {
-            HapticFeedback.mediumImpact();
+            SettingsService.instance.triggerHaptic(HapticType.medium);
           }
         }
         if (_remainingSeconds == 0) {
@@ -152,7 +153,7 @@ class _GameScreenState extends State<GameScreen>
             _handleRoundWin(false, isKnockout: false);
           } else {
             _isSuddenDeath = true;
-            HapticFeedback.heavyImpact();
+            SettingsService.instance.triggerHaptic(HapticType.heavy);
           }
         }
       });
@@ -286,7 +287,7 @@ class _GameScreenState extends State<GameScreen>
   void _collectOrb(bool byOrange) {
     if (_orbType == null) return;
     final type = _orbType!;
-    HapticFeedback.mediumImpact();
+    SettingsService.instance.triggerHaptic(HapticType.medium);
     setState(() => _clearOrb());
     _applyPowerUp(type, byOrange);
     _scheduleNextOrb();
@@ -458,7 +459,7 @@ class _GameScreenState extends State<GameScreen>
     _stopTimeAttackTimer();
     _stopAllPowerUpTimers();
     _isGameOver = true;
-    HapticFeedback.heavyImpact();
+    SettingsService.instance.triggerHaptic(HapticType.heavy);
 
     if (orangeWon) {
       _orangeRoundWins++;
@@ -619,7 +620,7 @@ class _GameScreenState extends State<GameScreen>
       _collectOrb(true);
     }
 
-    HapticFeedback.lightImpact();
+    SettingsService.instance.triggerHaptic(HapticType.light);
     _addTapEffect(position, Colors.white);
 
     setState(() {
@@ -653,7 +654,7 @@ class _GameScreenState extends State<GameScreen>
       _collectOrb(false);
     }
 
-    HapticFeedback.lightImpact();
+    SettingsService.instance.triggerHaptic(HapticType.light);
     _addTapEffect(position, Colors.white);
 
     setState(() {

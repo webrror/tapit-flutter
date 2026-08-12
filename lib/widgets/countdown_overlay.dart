@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:tapit/services/settings_service.dart';
 
 class CountdownOverlay extends StatefulWidget {
   final VoidCallback onComplete;
@@ -80,9 +80,9 @@ class _CountdownOverlayState extends State<CountdownOverlay>
 
   void _playStepHaptic() {
     if (_currentIndex == _steps.length - 1) {
-      HapticFeedback.heavyImpact();
+      SettingsService.instance.triggerHaptic(HapticType.heavy);
     } else {
-      HapticFeedback.mediumImpact();
+      SettingsService.instance.triggerHaptic(HapticType.medium);
     }
   }
 
