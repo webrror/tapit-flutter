@@ -13,10 +13,13 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  double orangeHeight = 0;
-  double purpleHeight = 0;
-  double heightLimit = 0;
-  final double heightDiff = 25;
+  static const int _totalFlex = 100;
+  static const int _flexStep = 3;
+  static const int _targetWinFlex = 95;
+
+  int _orangeFlex = 50;
+  int _purpleFlex = 50;
+  bool _isGameOver = false;
 
   @override
   void initState() {
@@ -26,15 +29,6 @@ class _GameScreenState extends State<GameScreen> {
       DeviceOrientation.portraitDown,
     ]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final screenHeight = MediaQuery.of(context).size.height;
-      setState(() {
-        orangeHeight = screenHeight / 2;
-        purpleHeight = screenHeight / 2;
-        heightLimit = screenHeight - 10;
-      });
-    });
   }
 
   @override
@@ -50,14 +44,15 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void resetGame() {
-    final screenHeight = MediaQuery.of(context).size.height;
     setState(() {
-      orangeHeight = screenHeight / 2;
-      purpleHeight = screenHeight / 2;
+      _orangeFlex = 50;
+      _purpleFlex = 50;
+      _isGameOver = false;
     });
   }
 
   void showWinnerDialog(String winnerText) {
+    if (!mounted) return;
     showDialog(
       barrierDismissible: false,
       context: context,
@@ -68,7 +63,10 @@ class _GameScreenState extends State<GameScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Lottie.asset(AssetConstants.winner, height: 250),
-              Text(winnerText, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+              Text(
+                winnerText,
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
               const SizedBox(height: 16),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.4,
@@ -105,25 +103,37 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void onTapOrange() {
-    if (orangeHeight > heightLimit) {
-      showWinnerDialog(StringConstants.orangeWon);
-    } else {
-      setState(() {
-        orangeHeight += heightDiff;
-        purpleHeight -= heightDiff;
-      });
-    }
+    if (_isGameOver) return;
+    HapticFeedback.selectionClick();
+    setState(() {
+      final newOrangeFlex = (_orangeFlex + _flexStep).clamp(0, _totalFlex);
+      _orangeFlex = newOrangeFlex;
+      _purpleFlex = _totalFlex - newOrangeFlex;
+
+      if (_orangeFlex >= _targetWinFlex) {
+        _isGameOver = true;
+        _orangeFlex = _totalFlex;
+        _purpleFlex = 0;
+        showWinnerDialog(StringConstants.orangeWon);
+      }
+    });
   }
 
   void onTapPurple() {
-    if (purpleHeight > heightLimit) {
-      showWinnerDialog(StringConstants.purpleWon);
-    } else {
-      setState(() {
-        orangeHeight -= heightDiff;
-        purpleHeight += heightDiff;
-      });
-    }
+    if (_isGameOver) return;
+    HapticFeedback.selectionClick();
+    setState(() {
+      final newPurpleFlex = (_purpleFlex + _flexStep).clamp(0, _totalFlex);
+      _purpleFlex = newPurpleFlex;
+      _orangeFlex = _totalFlex - newPurpleFlex;
+
+      if (_purpleFlex >= _targetWinFlex) {
+        _isGameOver = true;
+        _purpleFlex = _totalFlex;
+        _orangeFlex = 0;
+        showWinnerDialog(StringConstants.purpleWon);
+      }
+    });
   }
 
   @override
@@ -133,20 +143,32 @@ class _GameScreenState extends State<GameScreen> {
       child: Scaffold(
         body: Column(
           children: [
-            GestureDetector(
-              onTap: onTapOrange,
-              child: Container(
-                color: Colors.deepOrangeAccent,
-                height: orangeHeight,
+            if (_orangeFlex > 0)
+              Expanded(
+                flex: _orangeFlex,
+                child: Listener(
+                  behavior: HitTestBehavior.opaque,
+                  onPointerDown: (_) => onTapOrange(),
+                  child: Container(
+                    color: Colors.deepOrangeAccent,
+                    width: double.infinity,
+                    height: double.infinity,
+                  ),
+                ),
               ),
-            ),
-            GestureDetector(
-              onTap: onTapPurple,
-              child: Container(
-                color: Colors.deepPurpleAccent,
-                height: purpleHeight,
+            if (_purpleFlex > 0)
+              Expanded(
+                flex: _purpleFlex,
+                child: Listener(
+                  behavior: HitTestBehavior.opaque,
+                  onPointerDown: (_) => onTapPurple(),
+                  child: Container(
+                    color: Colors.deepPurpleAccent,
+                    width: double.infinity,
+                    height: double.infinity,
+                  ),
+                ),
               ),
-            ),
           ],
         ),
       ),

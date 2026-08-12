@@ -3,8 +3,16 @@ import 'package:flutter/services.dart';
 class NativeService {
   static const MethodChannel _channel = MethodChannel('common');
   static Future<AppInfo> getAppInfo() async {
-    final Map info = await _channel.invokeMethod('getAppInfo');
-    return AppInfo(appName: info['appName'], version: info['version']);
+    try {
+      final Map? info = await _channel.invokeMapMethod<String, dynamic>('getAppInfo');
+      if (info != null) {
+        return AppInfo(
+          appName: info['appName']?.toString() ?? 'Tapit',
+          version: info['version']?.toString() ?? '',
+        );
+      }
+    } catch (_) {}
+    return AppInfo(appName: 'Tapit', version: '');
   }
 }
 
