@@ -38,6 +38,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   simple_gradient_text: ^1.2.4
   lottie: ^3.3.1
+  url_launcher: ^6.3.1
+  share_plus: ^10.1.4
   # flutter_launcher_icons: ^0.10.0
 
 # flutter_icons:
