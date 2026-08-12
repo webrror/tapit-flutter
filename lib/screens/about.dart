@@ -38,11 +38,11 @@ class _AboutState extends State<About> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          spacing: 50,
+          spacing: 20,
           children: [
             Image.asset(
-              AssetConstants.builtWithFlutter,
-              width: 200,
+              AssetConstants.appIcon,
+              width: 100,
             ),
             Column(
               spacing: 10,
