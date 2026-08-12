@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:tapit/constants/asset_constants.dart';
 import 'package:tapit/constants/string_constants.dart';
+import 'package:tapit/constants/match_type.dart';
 import 'package:tapit/screens/about.dart';
 import 'package:tapit/screens/game_screen.dart';
 import 'package:tapit/screens/howtoplay.dart';
 import 'package:lottie/lottie.dart';
 import 'package:tapit/widgets/gradient_text_button.dart';
+import 'package:tapit/widgets/match_setup_sheet.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
   static const String routeName = '/';
+
+  void _startQuickPlay(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const GameScreen(
+          matchType: MatchType.single,
+          isVsAI: false,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +71,12 @@ class Home extends StatelessWidget {
                       spacing: 10,
                       children: [
                         CommonGradientTextButton(
-                          text: StringConstants.play,
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const GameScreen()),
-                            );
-                          },
+                          text: StringConstants.quickPlay,
+                          onTap: () => _startQuickPlay(context),
+                        ),
+                        CommonGradientTextButton(
+                          text: StringConstants.gameModes,
+                          onTap: () => MatchSetupSheet.show(context),
                         ),
                         CommonGradientTextButton(
                           text: StringConstants.howToPlay,
@@ -98,7 +111,7 @@ class Home extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  spacing: 50,
+                  spacing: 40,
                   children: [
                     Column(
                       children: [
@@ -117,16 +130,15 @@ class Home extends StatelessWidget {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      spacing: 10,
+                      spacing: 8,
                       children: [
                         CommonGradientTextButton(
-                          text: StringConstants.play,
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const GameScreen()),
-                            );
-                          },
+                          text: StringConstants.quickPlay,
+                          onTap: () => _startQuickPlay(context),
+                        ),
+                        CommonGradientTextButton(
+                          text: StringConstants.gameModes,
+                          onTap: () => MatchSetupSheet.show(context),
                         ),
                         CommonGradientTextButton(
                           text: StringConstants.howToPlay,
