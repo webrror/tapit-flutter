@@ -16,17 +16,15 @@ class About extends StatefulWidget {
 class _AboutState extends State<About> {
   AppInfo appInfo = AppInfo(appName: '', version: '');
 
-  // ── Customize these before publishing ─────────────────────────────────────
   static const _githubUrl = 'https://github.com/webrror/tapit-flutter';
   static const _playStoreUrl =
       'https://play.google.com/store/apps/details?id=com.rejie.tapit';
-  // ignore: unused_field
   static const _appStoreUrl =
-      'https://apps.apple.com/app/tapit/id0000000000'; // replace with real id
+      'https://apps.apple.com/us/app/tapit-2-player-battle/id6801258455';
   static const _shareText =
-      'Try Tapit - the two-player tap battle game! 🎮\n'
-      'Android: $_playStoreUrl';
-  // iOS coming soon — update _appStoreUrl and re-enable when published
+      'Try Tapit - the two-player tap battle game! 🎮\n\n'
+      'App Store: $_appStoreUrl\n'
+      'Google Play: $_playStoreUrl';
   // ──────────────────────────────────────────────────────────────────────────
 
   @override
@@ -144,10 +142,10 @@ class _AboutState extends State<About> {
               const SizedBox(height: 8),
               _ActionTile(
                 icon: Icons.apple_rounded,
-                iconColor: Colors.grey,
+                iconColor: colorScheme.onSurface,
                 title: 'Rate on App Store',
-                subtitle: '🚧 Coming Soon on iOS!',
-                onTap: null, // disabled until published
+                subtitle: 'Leave a review & help others discover Tapit',
+                onTap: () => _launch(_appStoreUrl),
               ),
 
               const SizedBox(height: 20),
